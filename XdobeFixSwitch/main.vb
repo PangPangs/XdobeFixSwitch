@@ -45,8 +45,11 @@ Public Class main
     End Enum
 
     Private Sub ChangeLanguage(ByVal isHangul As Boolean)
+        RichTextBox1.Clear()
         Log($"작업 시작을 준비중입니다...")
         Dim index As Integer = IIf(isHangul, 1, 2)
+        Dim LogWrite As Boolean = CheckBox1.Checked
+        Dim LogFileName As String = $"{My.Application.Info.DirectoryPath}\Log-{Now.Hour}{Now.Minute}{Now.Second}.txt"
         Dim fList As New List(Of String)
         Dim HashDataList As New List(Of String)
         Dim Result(6) As Integer
@@ -78,16 +81,24 @@ Public Class main
                                 Result(State.OK) += 1
                                 Log($" >> {data(index)}")
                             Catch ex As Exception
+                                Dim LogTemp As String
                                 If data(1) = data(2) Then
                                     Result(State.ShareName) += 1
                                     Log($" >> 한/영 이름이 동일합니다.")
+                                    LogTemp = $"{fList(0)}{w}  >> {data(index)}{w}파일명 동일"
                                 ElseIf GetFileName(fList(0)) = data(index) Then
                                     Result(State.SameName) += 1
                                     Log($" >> 이전 파일명과 같게 작성중입니다.")
+                                    LogTemp = $"{fList(0)}{w}  >> {data(index)}{w}이전 파일명과 같게 작성"
                                 Else
                                     Result(State.UnKnown) += 1
                                     Log($" >> 알 수 없는 오류입니다.")
                                     Log($" >> 프로그램 권한을 확인하세요.")
+                                    LogTemp = $"{fList(0)}{w}  >> {data(index)}{w}{ex.Message}{w _
+                                                                }-----------------------------------------"
+                                End If
+                                If (LogWrite) Then
+                                    My.Computer.FileSystem.WriteAllText(LogFileName, LogTemp, True)
                                 End If
                             End Try
                             isInDB = True

@@ -32,6 +32,7 @@ Partial Class main
         Me.Label3 = New System.Windows.Forms.Label()
         Me.StatusLabel1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -64,6 +65,7 @@ Partial Class main
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.CheckBox1)
         Me.Panel1.Controls.Add(Me.RichTextBox1)
         Me.Panel1.Controls.Add(Me.CngToEnglish)
         Me.Panel1.Controls.Add(Me.CngToHangul)
@@ -129,6 +131,18 @@ Partial Class main
     "서 정식으로 다운로드 받을 수 있습니다."
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Checked = True
+        Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBox1.Location = New System.Drawing.Point(13, 231)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(100, 16)
+        Me.CheckBox1.TabIndex = 4
+        Me.CheckBox1.Text = "로그파일 작성"
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
         'main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 12.0!)
@@ -162,4 +176,5 @@ Partial Class main
     Friend WithEvents CngToHangul As Button
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
+    Friend WithEvents CheckBox1 As CheckBox
 End Class
